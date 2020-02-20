@@ -27,8 +27,10 @@ class Cell : FancyCell<ItemData>
 
     public void OnClick()
     {
-        Debug.Log(Data.HrefContent);
+        Debug.Log("OnClick");
+        Data.OnClick?.Invoke(Data.HrefContent);
     }
+
     public override void UpdatePosition(float position)
     {
         currentPosition = position;
