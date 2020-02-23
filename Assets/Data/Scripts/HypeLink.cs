@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ItemDataBase : MonoBehaviour
+public class HypeLink : MonoBehaviour
 {
     [SerializeField] private MOCK_DATA MOCK_DATA;
     [SerializeField] private ScrollView scrollView = default;
-    [SerializeField] private InputField InputField;
     [SerializeField] private LinkText.LinkText LinkText;
-    [SerializeField] private string enterStr;
 
     private void Start()
     {
@@ -19,16 +14,15 @@ public class ItemDataBase : MonoBehaviour
             .ToArray();
         scrollView.UpdateData(items);
     }
- 
-    public void OnInputField(string str)
+
+    public void OnItemBoxClick(MOCK_DATAData data)
     {
-        Debug.Log(str);
-        enterStr = str;
+        LinkText.text += "Name: " + data.Content + ". Content: " + HrefContent(data) + ".\n";
+
     }
 
-    public void OnItemBoxClick(string itemhref)
+    private string HrefContent(MOCK_DATAData data)
     {
-        InputField.text += itemhref;
+        return string.Format("<a href={0}>{1}</a>", data.Id, data.Content);
     }
-
 }
